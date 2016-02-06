@@ -21,3 +21,13 @@
             (on-key direct-snake)
             (to-draw render-pit)
             (stop-when dead? render-end)))
+
+;
+
+(define (next-pit w)
+  (define snake (pit-snake w))
+  (define goos (pit-goos w))
+  (define goo-to-eat (can-eat snake goos))
+  (if goo-to-eat
+      (pit (grow snake) (age-goo (eat goos goo-to-eat)))
+      (pit (slither snake) (age-goo goos))))
